@@ -3,7 +3,7 @@ module Encapsulate
   class NestedMethodChain
 
     def self.run(callback:, with:, params:nil)
-      create(callback: callback, with: with).call(params)
+      call(create(callback: callback, with: with), params)
     end
 
     def self.create(callback:, with:)
@@ -15,6 +15,10 @@ module Encapsulate
       end
 
       lambdas.last
+    end
+
+    def self.call(callback, params = nil)
+      params.nil? ? callback.call : callback.call(params)
     end
 
   end
