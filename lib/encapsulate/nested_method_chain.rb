@@ -11,7 +11,7 @@ module Encapsulate
       lambdas[0] = callback
 
       with.each_with_index do |encapsulator, index|
-        lambdas[index + 1] = lambda { |params| encapsulator.call(callback: lambdas[index], params: params) }
+        lambdas[index + 1] = lambda { |params = nil| encapsulator.call(callback: lambdas[index], params: params) }
       end
 
       lambdas.last
