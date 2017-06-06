@@ -1,5 +1,6 @@
-require_relative "encapsulate/version"
+require_relative "encapsulate/nested_method_chain"
+require_relative "encapsulate/abstract_encapsulator"
 
 module Encapsulate
-  # Your code goes here...
+
 end
