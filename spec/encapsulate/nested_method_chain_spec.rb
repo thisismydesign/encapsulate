@@ -58,6 +58,24 @@ RSpec.describe Encapsulate::NestedMethodChain do
       end
     end
 
+
+    context "With several encapsulating function" do
+      it "Will nest encapsulators" do
+        callback = lambda {}
+        faulty_encapsulator = lambda { |callback:, params: nil| throw 'error occured' }
+        exception_handling_encapsulator = 
+        lambda do |callback:, params: nil|
+          begin
+            callback.call
+          rescue Exception => e
+            'exception occured'
+          end
+        end
+
+        expect{ Encapsulate::NestedMethodChain.run(callback: callback, with: [faulty_encapsulator, exception_handling_encapsulator]) }.to_not raise_error
+      end
+    end
+
     context "With several encapsulating function" do
       it "Will nest encapsulators in order" do
         callback = lambda {}
