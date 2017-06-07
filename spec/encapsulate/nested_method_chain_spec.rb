@@ -24,13 +24,13 @@ RSpec.describe Encapsulate::NestedMethodChain do
     end
 
     context "Without any encapsulation" do
-      it "Will simply call callback" do
+      it "Will call and return the result of callback" do
         return_value = 'hi'
         callback = lambda { return_value }
         expect(Encapsulate::NestedMethodChain.run(callback: callback, with: [])).to eq(return_value)
       end
 
-      it "Will simply call callback with given parameters" do
+      it "Will call callback with given parameters" do
         return_value = 'hi'
         callback = lambda { |x| return x }
         expect(Encapsulate::NestedMethodChain.run(callback: callback, with: [], params: return_value)).to eq(return_value)
