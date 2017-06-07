@@ -2,6 +2,13 @@ require "spec_helper"
 
 RSpec.describe Encapsulate::NestedMethodChain do
 
+  describe "#create" do
+    it "Will create a lambda expression" do
+      returned_value = Encapsulate::NestedMethodChain.create(callback: lambda {}, with: [])
+      expect(returned_value.lambda?).to be true
+    end
+  end
+
   describe "#run" do
 
     context "Without any encapsulation" do
