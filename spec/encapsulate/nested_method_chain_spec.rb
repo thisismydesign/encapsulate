@@ -11,6 +11,18 @@ RSpec.describe Encapsulate::NestedMethodChain do
 
   describe "#run" do
 
+    it "Can take lambda as `callback` parameter" do
+      callback = lambda { }
+      expect(callback).to receive(:call)
+      Encapsulate::NestedMethodChain.run(callback: callback, with: [])
+    end
+
+    it "Can take Proc as `callback` parameter" do
+      callback = Proc.new {}
+      expect(callback).to receive(:call)
+      Encapsulate::NestedMethodChain.run(callback: callback, with: [])
+    end
+
     context "Without any encapsulation" do
       it "Will simply call callback" do
         return_value = 'hi'
