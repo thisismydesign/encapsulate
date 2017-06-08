@@ -3,9 +3,22 @@ require "spec_helper"
 RSpec.describe Encapsulate::NestedMethodChain do
 
   describe "#create" do
+
     it "Will create a lambda expression" do
       returned_value = Encapsulate::NestedMethodChain.create(callback: lambda {}, with: [])
       expect(returned_value.lambda?).to be true
+    end
+
+    it "Encapsulating functions take the following parameters: `callback:, params: nil`" do
+      callback = lambda {}
+      encapsulator = lambda { |callback:, params: nil| return callback }
+      expect{ Encapsulate::NestedMethodChain.run(callback: callback, with: [encapsulator]) }.to_not raise_error
+
+      encapsulator_with_wrong_parameters = lambda { |something_else:| return callback }
+      expect{ Encapsulate::NestedMethodChain.run(callback: callback, with: [encapsulator_with_wrong_parameters]) }.to raise_error(ArgumentError)
+
+      encapsulator_with_wrong_parameters = lambda { |something_else| return callback }
+      expect{ Encapsulate::NestedMethodChain.run(callback: callback, with: [encapsulator_with_wrong_parameters]) }.to raise_error(ArgumentError)
     end
   end
 
@@ -38,6 +51,7 @@ RSpec.describe Encapsulate::NestedMethodChain do
     end
 
     context "With one encapsulating function" do
+
       it "Will call the encapsulator and pass the callback function as first parameter" do
         callback = lambda {}
         encapsulator = lambda { |callback:, params: nil| return callback }
@@ -57,7 +71,6 @@ RSpec.describe Encapsulate::NestedMethodChain do
         expect(Encapsulate::NestedMethodChain.run(callback: callback, with: [encapsulator])).to eq(nil)
       end
     end
-
 
     context "With several encapsulating function" do
       it "Will nest encapsulators" do
