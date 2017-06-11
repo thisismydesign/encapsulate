@@ -9,9 +9,8 @@ Gem::Specification.new do |spec|
   spec.authors       = ["thisismydesign"]
   spec.email         = ["thisismydesign@users.noreply.github.com"]
 
-  spec.summary       = %q{}
-  spec.description   = %q{}
-  spec.homepage      = ""
+  spec.summary       = "A small framework that enables encapsulating pieces of code within eachother."
+  spec.homepage      = "https://github.com/thisismydesign/encapsulate"
 
   # Prevent pushing this gem to RubyGems.org. To allow pushes either set the 'allowed_push_host'
   # to allow pushing to a single host or delete this section to allow pushing to any host.
