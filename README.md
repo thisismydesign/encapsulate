@@ -108,7 +108,7 @@ my_encapsulator = self.method(:my_encapsulator)
 
 The base function may take no parameters which is why `params` in our interface must default to nil and we also need to take care of calling the `callback` accordingly. This small piece of logic is implemented in the gem [reflection_utils](https://github.com/thisismydesign/reflection_utils) (as seen below) alongside with other useful reflection related functions.
 
-You may use any object that responds to `call`. The only difference will be in how you reference these objects.
+You may use any objects that respond to `call`. The only difference will be in how you reference these objects.
 These are also a valid skeletons:
 
 ```ruby
