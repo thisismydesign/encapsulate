@@ -66,7 +66,7 @@ encapsulator1
 end
 ```
 
-In order to achieve this each encapsulator function must know the next one in the chain (the last one being the base function). Also the parameters of the base function must be carried by the encapsulators. Our pseudocode should something like this:
+In order to achieve this each encapsulator function must know the next one in the chain (the last one being the base function). Also the parameters of the base function must be carried by the encapsulators. Our pseudocode should look something like this:
 
 ```ruby
 def encapsulator1(callback:, params: nil)
