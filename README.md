@@ -103,9 +103,11 @@ Encapsulate.run callback: base_function, with: [encapsulator1, encapsulator2], p
 To sidestep the issue of varying number of parameters we must use [keyword arguments or a single Hash parameter](https://robots.thoughtbot.com/ruby-2-keyword-arguments) in the base function.
 
 ```ruby
-def my_func(my_param:, my_other_param:)
+def self.base_function(my_param:, my_other_param:)
   # ...
 end
+
+base_function = self.method(:base_function)
 ```
 
 ### Encapsulators
