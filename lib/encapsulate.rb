@@ -1,4 +1,3 @@
-require 'easy_logging'
 require 'reflection_utils'
 
 module Encapsulate
