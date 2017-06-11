@@ -125,7 +125,7 @@ my_encapsulator = self.method(:my_encapsulator)
 The base function may take no parameters which is why `params` in our interface must default to nil and we also need to take care of calling the `callback` accordingly. This small piece of logic is implemented in the gem [reflection_utils](https://github.com/thisismydesign/reflection_utils) (as seen below) alongside with other useful reflection related functions.
 
 You may use any objects that respond to `call`. The only difference will be in how you reference these objects.
-These are also a valid skeletons:
+These are also valid skeletons:
 
 ```ruby
 my_encapsulator = lambda do |callback:, params: nil|
@@ -213,7 +213,7 @@ This gem is developed using Bundler conventions. A good overview can be found [h
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/encapsulate.
+Bug reports and pull requests are welcome on GitHub at https://github.com/thisismydesign/encapsulate.
 
 ## License
 
