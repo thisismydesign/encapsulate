@@ -84,6 +84,20 @@ end
 
 Below you will find some insight on how to create and structure your call chains but you can also head right to the [unit tests](https://github.com/thisismydesign/encapsulate/blob/master/spec/encapsulate_spec.rb) for hands-on examples.
 
+### Building the chain
+
+```ruby
+# Single encapsulator
+Encapsulate.run callback: base_function, with: [encapsulator]
+
+# Multiple encapsulators
+Encapsulate.run callback: base_function, with: [encapsulator1, encapsulator2]
+# They will apply in the given order: encapsulator2(encapsulator1(callback))
+
+# Parameters
+Encapsulate.run callback: base_function, with: [encapsulator1, encapsulator2], params: {arg: 'something'}
+```
+
 ### Base function
 
 To sidestep the issue of varying number of parameters we must use [keyword arguments or a single Hash parameter](https://robots.thoughtbot.com/ruby-2-keyword-arguments) in the base function.
