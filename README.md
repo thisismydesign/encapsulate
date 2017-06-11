@@ -91,8 +91,8 @@ Below you will find some insight on how to create and structure your call chains
 Encapsulate.run callback: base_function, with: [encapsulator]
 
 # Multiple encapsulators
-Encapsulate.run callback: base_function, with: [encapsulator1, encapsulator2]
 # They will apply in the given order: encapsulator2(encapsulator1(callback))
+Encapsulate.run callback: base_function, with: [encapsulator1, encapsulator2]
 
 # Parameters
 Encapsulate.run callback: base_function, with: [encapsulator1, encapsulator2], params: {arg: 'something'}
