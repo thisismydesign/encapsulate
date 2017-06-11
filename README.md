@@ -145,7 +145,7 @@ my_encapsulator = Proc.new do |callback:, params: nil|
 end
 ```
 
-Encapsulators will ideally not use any parameters. They do take the base function's parameter hash as second parameter and you could *technically* hide additinal parameters there but it's not a good practice. Instead:
+Encapsulators will ideally not use any parameters. They do take the base function's parameter hash as second parameter and you could *technically* hide additional parameters there but it's not a good practice. Instead:
 - try to keep encapsulators simple
 - use their own classes to configure them
 
