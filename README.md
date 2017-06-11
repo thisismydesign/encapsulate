@@ -80,9 +80,92 @@ def encapsulator1(callback:, params: nil)
 end
 ```
 
-To sidestep the issue of varying number of parameters we must use [keyword arguments or a single Hash parameter](https://robots.thoughtbot.com/ruby-2-keyword-arguments) in the base function. There may be no parameters which is why `params` in out interface must default to nil and we'll also need to take care of calling the base function accordingly.
+## How to use it?
 
-Don't worry it's actually very easy. I offer some insight on how to create and structure your encapsulators but you can also head right to [real-life examples](TODO link future Encapsulators project).
+### Base function
+
+To sidestep the issue of varying number of parameters we must use [keyword arguments or a single Hash parameter](https://robots.thoughtbot.com/ruby-2-keyword-arguments) in the base function.
+
+```ruby
+def my_func(my_param:, my_other_param:)
+  # ...
+end
+```
+
+### Encapsulators
+
+Encapsulators should be implemented (for reasons detailed in the previous chapter) along the lines of:
+
+```ruby
+def self.my_encapsulator(callback:, params: nil)
+  # ...
+  params.nil? ? callback.call : callback.call(params)
+  # ...
+end
+
+my_encapsulator = self.method(:my_encapsulator)
+```
+
+The base function may take no parameters which is why `params` in our interface must default to nil and we also need to take care of calling the `callback` accordingly. This small piece of logic is implemented in the gem [reflection_utils](https://github.com/thisismydesign/reflection_utils) (as seen below) alongside with other useful reflection related functions.
+
+You may use any object that responds to `call`. The only difference will be in how you reference these objects.
+These are also a valid skeletons:
+
+```ruby
+my_encapsulator = lambda do |callback:, params: nil|
+  # ...
+  ReflectionUtils.call(callback, params)
+  # ...
+end
+```
+
+```ruby
+my_encapsulator = Proc.new do |callback:, params: nil|
+  # ...
+  ReflectionUtils.call(callback, params)
+  # ...
+end
+```
+
+Encapsulators will ideally not use any parameters. They do take the base function's parameter hash as second parameter and you could technically *hide* additinal parameters there but it's not a good practice. Instead:
+- try to keep encapsulators simple
+- use their own classes to configurate them
+
+This brings us to how to structure encapsulators.
+
+#### 1 class per encapsulator
+
+```ruby
+class ExceptionEncapsulator
+  def self.callback(callback:, params: nil)
+    # ...
+  end
+end
+```
+
+#### Collcetor class
+
+```ruby
+class Encapsulators
+  def self.exception_handling(callback:, params: nil)
+    # ...
+  end
+  
+  def self.time_measurement(callback:, params: nil)
+    # ...
+  end
+  
+  # ...
+end
+```
+
+#### In place
+
+```ruby
+my_encapsulator = lambda do |callback:, params: nil|
+  # ...
+end
+```
 
 ## Installation
 
@@ -99,10 +182,6 @@ And then execute:
 Or install it yourself as:
 
     $ gem install encapsulate
-
-## Usage
-
-TODO: Write usage instructions here
 
 ## Feedback
 
