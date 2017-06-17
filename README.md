@@ -89,6 +89,11 @@ Below you will find some insight on how to create and structure your call chains
 ### Building the chain
 
 ```ruby
+require 'encapsulate'
+```
+
+
+```ruby
 # Single encapsulator
 Encapsulate.run callback: base_function, with: [encapsulator]
 
