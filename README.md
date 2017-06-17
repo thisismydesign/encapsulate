@@ -82,7 +82,7 @@ end
 
 ## How to use it?
 
-The [encapsulators](https://github.com/thisismydesign/encapsulators) gem contains a collection of practical functions to be used with the Encapsulate. Maybe the solution for your use case is already implemented. If not then please consider adding it.
+The [encapsulators](https://github.com/thisismydesign/encapsulators) gem contains a collection of practical functions to be used with Encapsulate. You may check if your use case is already implemented. If not then please consider contributing it.
 
 Below you will find some insight on how to create and structure your call chains but you can also head right to the [unit tests](https://github.com/thisismydesign/encapsulate/blob/master/spec/encapsulate_spec.rb) for hands-on examples.
 
