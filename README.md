@@ -9,9 +9,9 @@
 
 ## What is this?
 
-Ever get tired of writing exception handling blocks? Ever think it's not really DRY (Don't Repeat Yourself)?
+Ever get tired of writing exception handling blocks? Ever think it's not really DRY (`Don't Repeat Yourself`)?
 
-Wouldn't it be better instead of...
+With Ruby instead of...
 
 ```ruby
 begin
@@ -23,13 +23,31 @@ ensure
 end
 ```
 
-... to just write
+... you can do
+
+```ruby
+def handle_io_error
+  begin
+    yield
+  rescue IOError => e
+    handle_io_error
+  ensure
+    close_io
+  end
+end
+
+handle_io_error do
+  read_file
+end
+```
+
+... and with `Encapsulate` you can do
 
 ```ruby
 run callback: read_file, with: io_error_handling
 ```
 
-Not to mention code duplications you just can't get rid of
+Not to mention code duplications that are otherwise difficult to get rid of...
 
 ```ruby
 signal_processing_start
@@ -41,13 +59,23 @@ stop_time_measurement
 signal_processing_end
 ```
 
-How about
+How about...
+
+```ruby
+lifecycle_signals do
+  time_measurement do
+    read_file
+  end
+end
+```
+
+... or with `Encapsulate`
 
 ```ruby
 run callback: process, with: [time_measurement, lifecycle_signals]
 ```
 
-Encapsulate enables you to do just that.
+`Encapsulate` provides an alternaive solution utilizing a function-like syntax instead of nesting.
 
 ## How does it work?
 
